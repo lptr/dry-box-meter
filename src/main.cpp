@@ -1,9 +1,48 @@
 #include <Arduino.h>
 
+#include <Application.hpp>
+#include <Task.hpp>
+#include <Telemetry.hpp>
+#include <wifi/WiFiManagerProvider.hpp>
+
+using namespace farmhub::client;
+
+class DryBoxDeviceConfig : public Application::DeviceConfiguration {
+public:
+    DryBoxDeviceConfig()
+        : Application::DeviceConfiguration("dry-box", "mk1") {
+    }
+};
+
+class DryBoxAppConfig : public Application::AppConfiguration {
+public:
+    DryBoxAppConfig()
+        : Application::AppConfiguration(seconds { 5 }) {
+    }
+};
+
+class DryBoxApp : public Application {
+public:
+    DryBoxApp()
+        : Application("SimpleApp", "UNKNOWN", deviceConfig, appConfig, wifiProvider) {
+    }
+
+protected:
+    void beginApp() override {
+    }
+
+private:
+    DryBoxDeviceConfig deviceConfig;
+    DryBoxAppConfig appConfig;
+    NonBlockingWiFiManagerProvider wifiProvider { tasks };
+};
+
+DryBoxApp app;
+
 void setup() {
-  // put your setup code here, to run once:
+    app.begin();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+    app.loop();
 }
