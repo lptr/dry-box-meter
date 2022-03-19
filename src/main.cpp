@@ -1,5 +1,9 @@
 #include <Arduino.h>
 
+#include <gfxfont.h>
+
+#include <Fonts/FreeSans9pt7b.h>
+#include <Fonts/FreeSansBold24pt7b.h>
 #include <GxEPD2_BW.h>
 #include <Wire.h>
 
@@ -45,14 +49,28 @@ private:
 DryBoxApp app;
 
 void setup() {
+    Serial.begin(115200);
+
     display.init();
-    // comment out next line to have no or minimal Adafruit_GFX code
+    Serial.printf("Initialzed display %dx%d\n", display.width(), display.height());
+
     display.setTextColor(GxEPD_BLACK);
     display.firstPage();
+
     do {
-        display.fillScreen(GxEPD_WHITE);
-        // comment out next line to have no or minimal Adafruit_GFX code
-        display.print("Hello World!");
+        display.setCursor(0, 36);
+
+        display.setFont(&FreeSans9pt7b);
+        display.println("Temperature");
+        display.println();
+        display.setFont(&FreeSansBold24pt7b);
+        display.println("24 °C");
+
+        display.setFont(&FreeSans9pt7b);
+        display.println("Humidity");
+        display.println();
+        display.setFont(&FreeSansBold24pt7b);
+        display.println("20%");
     } while (display.nextPage());
 
     app.begin();
