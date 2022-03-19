@@ -1,9 +1,14 @@
 #include <Arduino.h>
 
+#include <GxEPD2_BW.h>
+#include <Wire.h>
+
 #include <Application.hpp>
 #include <Task.hpp>
 #include <Telemetry.hpp>
 #include <wifi/WiFiManagerProvider.hpp>
+
+#include "GxEPD2_display_selection_new_style.h"
 
 using namespace farmhub::client;
 
@@ -40,6 +45,16 @@ private:
 DryBoxApp app;
 
 void setup() {
+    display.init();
+    // comment out next line to have no or minimal Adafruit_GFX code
+    display.setTextColor(GxEPD_BLACK);
+    display.firstPage();
+    do {
+        display.fillScreen(GxEPD_WHITE);
+        // comment out next line to have no or minimal Adafruit_GFX code
+        display.print("Hello World!");
+    } while (display.nextPage());
+
     app.begin();
 }
 
