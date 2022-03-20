@@ -8,6 +8,8 @@
 #include "Display.hpp"
 #include "Environment.hpp"
 
+#include "version.h"
+
 using namespace farmhub::client;
 
 class DryBoxDeviceConfig : public Application::DeviceConfiguration {
@@ -27,7 +29,7 @@ public:
 class DryBoxApp : public Application {
 public:
     DryBoxApp()
-        : Application("SimpleApp", "UNKNOWN", deviceConfig, appConfig, wifiProvider) {
+        : Application("DryBoxApp", VERSION, deviceConfig, appConfig, wifiProvider) {
         telemetryPublisher.registerProvider(environment);
     }
 
