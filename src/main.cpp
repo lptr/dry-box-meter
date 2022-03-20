@@ -6,6 +6,7 @@
 #include <wifi/WiFiManagerProvider.hpp>
 
 #include "Display.hpp"
+#include "Environment.hpp"
 
 using namespace farmhub::client;
 
@@ -27,11 +28,13 @@ class DryBoxApp : public Application {
 public:
     DryBoxApp()
         : Application("SimpleApp", "UNKNOWN", deviceConfig, appConfig, wifiProvider) {
+        telemetryPublisher.registerProvider(environment);
     }
 
 protected:
     void beginApp() override {
         display.begin();
+        environment.begin(GPIO_NUM_21, GPIO_NUM_22);
     }
 
 private:
@@ -39,6 +42,7 @@ private:
     DryBoxAppConfig appConfig;
     NonBlockingWiFiManagerProvider wifiProvider { tasks };
     Display display { tasks };
+    Environment environment;
 };
 
 DryBoxApp app;
