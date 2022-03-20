@@ -22,7 +22,7 @@ public:
 class DryBoxAppConfig : public Application::AppConfiguration {
 public:
     DryBoxAppConfig()
-        : Application::AppConfiguration(seconds { 5 }) {
+        : Application::AppConfiguration(minutes { 1 }) {
     }
 };
 
