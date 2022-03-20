@@ -41,8 +41,8 @@ private:
     DryBoxDeviceConfig deviceConfig;
     DryBoxAppConfig appConfig;
     NonBlockingWiFiManagerProvider wifiProvider { tasks };
-    Display display { tasks };
     Environment environment;
+    Display display { tasks, environment };
 };
 
 DryBoxApp app;

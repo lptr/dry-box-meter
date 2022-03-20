@@ -17,6 +17,15 @@ public:
     void begin(gpio_num_t sda, gpio_num_t scl) {
         sensor.begin(sda, scl);
         Serial.printf("Initialed HTU21D sensor on SDA = %d, SCL = %d, status = 0x%x\n", sda, scl, sensor.getStatus());
+        sensor.read();
+    }
+
+    float getTemperature() {
+        return sensor.getTemperature();
+    }
+
+    float getHumidity() {
+        return sensor.getHumidity();
     }
 
 protected:
