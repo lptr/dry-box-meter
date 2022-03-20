@@ -49,22 +49,20 @@ private:
 
         display.firstPage();
         display.setTextColor(GxEPD_BLACK);
+        display.setCursor(0, 36);
 
-        do {
-            display.setCursor(0, 36);
+        display.setFont(&FreeSans9pt7b);
+        display.println("Temperature");
+        display.println();
+        display.setFont(&FreeSansBold18pt7b);
+        display.println(temp);
 
-            display.setFont(&FreeSans9pt7b);
-            display.println("Temperature");
-            display.println();
-            display.setFont(&FreeSansBold18pt7b);
-            display.println(temp);
-
-            display.setFont(&FreeSans9pt7b);
-            display.println("Humidity");
-            display.println();
-            display.setFont(&FreeSansBold18pt7b);
-            display.println(humidity);
-        } while (display.nextPage());
+        display.setFont(&FreeSans9pt7b);
+        display.println("Humidity");
+        display.println();
+        display.setFont(&FreeSansBold18pt7b);
+        display.println(humidity);
+        display.nextPage();
 
         lastTemperature = temp;
         lastHumidity = humidity;
